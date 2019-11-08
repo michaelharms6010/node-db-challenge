@@ -9,10 +9,10 @@ module.exports = {
     },
     useNullAsDefault: true,
     migrations: {
-      filename: "./data/migrations"
+      filename: "./migrations"
     },
     seeds: {
-      filename: "./data/seeds"
+      filename: "./seeds"
     },
     pool: {
       afterCreate: (conn, done) => {

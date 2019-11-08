@@ -4,13 +4,18 @@ const cors = require("cors");
 const helmet = require("helmet")
 const morgan = require("morgan");
 
+const BusinessRouter = require("./business-helpers/business-router")
+
 const server = express()
+
+port = process.env.PORT || 4000;
 
 server.use(cors());
 server.use(helmet());
 server.use(morgan("dev"));
+server.use(express.json());
 
-port = process.env.PORT || 4000;
+server.use('/biz', BusinessRouter)
 
 server.get("/", (req,res)  => {
     console.log("Server Console is ALIVE")
