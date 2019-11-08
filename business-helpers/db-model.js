@@ -10,7 +10,7 @@ module.exports = {
     getProjectById,
     getProjectTasks
 }
-
+ 
 function getProjects() {
     return db("projects")
 }
