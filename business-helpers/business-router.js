@@ -26,12 +26,21 @@ router.get("/projects", (req, res) => {
 router.get("/projects/:id", (req, res) => {
     db.getProjectById(req.params.id)
         .then(project => {
+            project.forEach(project => {
                 if (project.completed) {
                     project.completed = "true"
                 } else {
                     project.completed = "false"
-                }  
-            res.status(201).json(project)
+                }
+                db.getProjectTasks(req.params.id).then(tasks => {
+                    console.log(res)
+                    project.tasks = tasks;
+                    res.status(201).json(project)
+                })
+                
+            })
+            console.log('returning')
+            
         })
         .catch(err => {
             res.status(500).json({
