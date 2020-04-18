@@ -87,9 +87,9 @@ router.get("/tasks", (req, res) => {
 router.get("/tasks/:id", (req, res) => {
     db.getTaskById(req.params.id)
         .then(task => {
-            let tasksList = task.map(item => item.name)
+            let contextList = task.map(item => item.name)
             delete task[0].name
-            task[0].contexts = tasksList
+            task[0].contexts = contextList
             res.status(200).json(task[0])
         })
         .catch(err => {
