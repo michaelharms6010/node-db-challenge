@@ -84,6 +84,18 @@ router.get("/tasks", (req, res) => {
         })
 })
 
+router.get("/tasks/:id", (req, res) => {
+    db.getTaskById(req.params.id)
+        .then(task => {
+            res.status(200).json(task)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Error getting tasks: ", err
+            })
+        })
+})
+
 router.get("/resources", (req, res) => {
     db.getResources()
         .then(resource => {

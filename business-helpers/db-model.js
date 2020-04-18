@@ -9,7 +9,7 @@ module.exports = {
     addResource,
     getProjectById,
     getProjectTasks,
-    getProjectTasks
+    getTaskById
 }
  
 function getProjects() {
@@ -26,7 +26,13 @@ function getProjectById(id) {
     // });
 }
 
-
+function getTaskById(id) {
+    return db("tasks")
+        .join("task_contexts as tc", "tasks.id", "tc.task_id")
+        .join("contexts as c", "tc.context_id", "c.id")
+        .where({"task_id": id})
+        .select("tasks.task_description", "tasks.task_notes", "tasks.completed", "c.name")
+}
 
 function getTasks() {
     return db("tasks as t")
